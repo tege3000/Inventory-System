@@ -1,7 +1,7 @@
 ﻿
 ## 🧾 Inventory Management System App
 
-A full-stack ASP.NET Core MVC web application for managing product inventory in real-time. Built with ASP.NET Core, Entity Framework Core, and SQL Server, and deployed using Azure App Services and Azure SQL Database.
+A full-stack ASP.NET Core MVC web application for managing product inventory in real-time. Built with ASP.NET Core, Entity Framework Core, and SQL Server
 
 ---
 
