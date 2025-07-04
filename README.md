@@ -9,7 +9,6 @@ A full-stack ASP.NET Core MVC web application for real-time inventory tracking. 
 - 🗃️ CRUD for Products, Categories, and Suppliers  
 - 🔐 Optional role-based user authentication  
 - 📊 Real-time stock tracking and search  
-- ☁️ Azure deployment ready  
 
 ---
 
@@ -105,80 +104,16 @@ dotnet ef database update
 dotnet run
 ```
 
-Visit: `http://localhost:5000` or `https://localhost:5001`
+Visit: `http://localhost:5173/`
 
 ---
 
-## 🔐 Optional: Authentication
+## 📋 TODO: For Next Sprint
 
-### Step 1: Add Identity
-```bash
-dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
-```
-
-### Step 2: Configure Identity
-```csharp
-builder.Services.AddDefaultIdentity<IdentityUser>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
-```
-
----
-
-## ☁️ Azure Deployment
-
-### 1. Create Resources
-- Azure App Service  
-- Azure SQL Database  
-
-### 2. Publish from Visual Studio  
-- Right-click project → **Publish** → Azure → App Service  
-
-### 3. Set Connection String  
-In Azure portal App Settings:
-- Name: `DefaultConnection`
-- Value: Azure SQL connection string
-
-### 4. Apply Migrations to Azure DB
-```bash
-dotnet ef database update --connection "Azure_SQL_Connection_String"
-```
-
----
-
-## 🧠 Sample Controller Code
-
-```csharp
-public async Task<IActionResult> Index()
-{
-    var products = await _context.Products
-        .Include(p => p.Category)
-        .Include(p => p.Supplier)
-        .ToListAsync();
-    return View(products);
-}
-```
-
----
-
-## 🔧 Git Best Practices
-
-- Add to `.gitignore`:
-```
-.vs/
-bin/
-obj/
-```
-
-- Common Git commands:
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin https://github.com/tege3000/InventorySystem.git
-git push -u origin main
-```
-
----
+-- 🔐 Role-based Authentication with ASP.NET Identity
+-- 🔍 Search & Filter Products
+-- 📈 Low-stock Alerts
+--☁️ Azure deployment with App Service and Azure SQL
 
 ## 👨‍💻 Author
 
