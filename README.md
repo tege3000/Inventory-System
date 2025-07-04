@@ -113,8 +113,9 @@ Visit: `http://localhost:5173/`
 -- 🔐 Role-based Authentication with ASP.NET Identity
 -- 🔍 Search & Filter Products
 -- 📈 Low-stock Alerts
---☁️ Azure deployment with App Service and Azure SQL
+-- ☁️ Azure deployment with App Service and Azure SQL
 
+---
 ## 👨‍💻 Author
 
 **Tito Egeonu**  
