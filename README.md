@@ -110,10 +110,10 @@ Visit: `http://localhost:5173/`
 
 ## 📋 TODO: For Next Sprint
 
--- 🔐 Role-based Authentication with ASP.NET Identity
--- 🔍 Search & Filter Products
--- 📈 Low-stock Alerts
--- ☁️ Azure deployment with App Service and Azure SQL
+- 🔐 Role-based Authentication with ASP.NET Identity
+- 🔍 Search & Filter Products
+- 📈 Low-stock Alerts
+- ☁️ Azure deployment with App Service and Azure SQL
 
 ---
 ## 👨‍💻 Author
