@@ -1,30 +1,32 @@
-﻿
-## 🧾 Inventory Management System App
+﻿# 📦 Inventory Management System
 
-A full-stack ASP.NET Core MVC web application for managing product inventory in real-time. Built with ASP.NET Core, Entity Framework Core, and SQL Server.
-
----
-
-## 📦 Features
-
-- 🗃️ CRUD operations for Products, Categories, and Suppliers
-- 🧱 Built using ASP.NET Core MVC and Entity Framework Core
+A full-stack ASP.NET Core MVC web application for real-time inventory tracking. Built with Entity Framework Core and SQL Server. Deployed using Azure App Services and Azure SQL Database.
 
 ---
 
-## 🛠️ Technologies Used
+## 🚀 Features
 
-- ASP.NET Core MVC (.NET 6/7)
-- C#, HTML5, CSS3, Bootstrap
-- Entity Framework Core
-- SQL Server
-- Azure App Service & Azure SQL
-- GitHub (Version Control)
+- 🗃️ CRUD for Products, Categories, and Suppliers  
+- 🔐 Optional role-based user authentication  
+- 📊 Real-time stock tracking and search  
+- ☁️ Azure deployment ready  
+
+---
+
+## 🧰 Tech Stack
+
+- ASP.NET Core MVC (.NET 6/7)  
+- Entity Framework Core (Code-First)  
+- SQL Server  
+- Azure App Service & Azure SQL  
+- GitHub for version control  
 
 ---
 
 ## 📁 Project Structure
-`InventorySystem/
+
+```
+InventorySystem/
 ├── Controllers/
 ├── Models/
 ├── Views/
@@ -33,12 +35,16 @@ A full-stack ASP.NET Core MVC web application for managing product inventory in 
 ├── appsettings.json
 ├── Program.cs
 ├── InventorySystem.csproj
-├── README.md ← This file`
+├── README.md
+```
 
-## 🗃️ Entity Models
+---
 
-### Product
-`public class Product {
+## 🧱 Entity Models
+
+### Product.cs
+```csharp
+public class Product {
     public int Id { get; set; }
     public string Name { get; set; }
     public string SKU { get; set; }
@@ -48,65 +54,136 @@ A full-stack ASP.NET Core MVC web application for managing product inventory in 
     public Category Category { get; set; }
     public int SupplierId { get; set; }
     public Supplier Supplier { get; set; }
-}` 
+}
+```
 
-
-### Category
-`public class Category {
+### Category.cs
+```csharp
+public class Category {
     public int Id { get; set; }
     public string Name { get; set; }
     public ICollection<Product> Products { get; set; }
 }
-` 
+```
 
-### Supplier
-`public class Supplier {
+### Supplier.cs
+```csharp
+public class Supplier {
     public int Id { get; set; }
     public string Name { get; set; }
     public string ContactInfo { get; set; }
     public ICollection<Product> Products { get; set; }
-}` 
+}
+```
 
+---
 
-🛠️ Getting Started
-1. Clone the Repository
+## 🛠️ Getting Started
+
+### 1. Clone the Repository
+```bash
 git clone https://github.com/tege3000/InventorySystem.git
 cd InventorySystem
+```
 
-2. Configure the Database
-Update the connection string in appsettings.json:
+### 2. Configure the Database
+In `appsettings.json`:
+```json
+"ConnectionStrings": {
+  "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=InventoryDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true"
+}
+```
 
-json
-`"ConnectionStrings": {
-    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=InventoryDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true",
-    "ApplicationDbContext": "Server=(localdb)\\mssqllocaldb;Database=ApplicationDbContext-d7c8b7f8-207d-47a9-95bf-0e666a399e5f;Trusted_Connection=True;MultipleActiveResultSets=true"
-}` 
-
-
-3. Apply Migrations
+### 3. Apply Migrations
+```bash
 dotnet ef migrations add InitialCreate
 dotnet ef database update
-4. Run the Application
+```
+
+### 4. Run the App
+```bash
 dotnet run
-`Visit http://localhost:5173 in your browser`.
+```
 
-🔐 Authentication
-To enable login & roles:
+Visit: `http://localhost:5000` or `https://localhost:5001`
 
-Add Identity to your project:
+---
+
+## 🔐 Optional: Authentication
+
+### Step 1: Add Identity
+```bash
 dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
-Configure Identity in Program.cs
+```
 
---
-## TODO: For Next Sprint
-- 🔐 Role-based Authentication with ASP.NET Identity (optional)
-- 🔍 Search & Filter Products
-- 📈 Low-stock Alerts (optional)
-- ☁️ Deployed to Azure with Azure SQL Database
+### Step 2: Configure Identity
+```csharp
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+```
 
+---
 
+## ☁️ Azure Deployment
 
-👨‍💻 Author
-Tito Egeonu
-LinkedIn : https://www.linkedin.com/in/tito-egeonu/
-GitHub : https://github.com/tege3000
+### 1. Create Resources
+- Azure App Service  
+- Azure SQL Database  
+
+### 2. Publish from Visual Studio  
+- Right-click project → **Publish** → Azure → App Service  
+
+### 3. Set Connection String  
+In Azure portal App Settings:
+- Name: `DefaultConnection`
+- Value: Azure SQL connection string
+
+### 4. Apply Migrations to Azure DB
+```bash
+dotnet ef database update --connection "Azure_SQL_Connection_String"
+```
+
+---
+
+## 🧠 Sample Controller Code
+
+```csharp
+public async Task<IActionResult> Index()
+{
+    var products = await _context.Products
+        .Include(p => p.Category)
+        .Include(p => p.Supplier)
+        .ToListAsync();
+    return View(products);
+}
+```
+
+---
+
+## 🔧 Git Best Practices
+
+- Add to `.gitignore`:
+```
+.vs/
+bin/
+obj/
+```
+
+- Common Git commands:
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/tege3000/InventorySystem.git
+git push -u origin main
+```
+
+---
+
+## 👨‍💻 Author
+
+**Tito Egeonu**  
+[GitHub](https://github.com/tege3000)  
+[LinkedIn](https://linkedin.com/in/tito-egeonu)
+
+---
