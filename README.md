@@ -24,7 +24,7 @@ A full-stack ASP.NET Core MVC web application for managing product inventory in 
 ---
 
 ## 📁 Project Structure
-InventorySystem/
+`InventorySystem/
 ├── Controllers/
 ├── Models/
 ├── Views/
@@ -33,13 +33,12 @@ InventorySystem/
 ├── appsettings.json
 ├── Program.cs
 ├── InventorySystem.csproj
-├── README.md ← This file
+├── README.md ← This file`
 
 ## 🗃️ Entity Models
 
 ### Product
-`csharp` 
-public class Product {
+`public class Product {
     public int Id { get; set; }
     public string Name { get; set; }
     public string SKU { get; set; }
@@ -49,24 +48,25 @@ public class Product {
     public Category Category { get; set; }
     public int SupplierId { get; set; }
     public Supplier Supplier { get; set; }
-}
+}` 
+
 
 ### Category
-`csharp` 
-public class Category {
+`public class Category {
     public int Id { get; set; }
     public string Name { get; set; }
     public ICollection<Product> Products { get; set; }
 }
+` 
 
 ### Supplier
-`csharp` 
-public class Supplier {
+`public class Supplier {
     public int Id { get; set; }
     public string Name { get; set; }
     public string ContactInfo { get; set; }
     public ICollection<Product> Products { get; set; }
-}
+}` 
+
 
 🛠️ Getting Started
 1. Clone the Repository
@@ -77,18 +77,18 @@ cd InventorySystem
 Update the connection string in appsettings.json:
 
 json
-`json` 
-"ConnectionStrings": {
+`"ConnectionStrings": {
     "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=InventoryDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true",
     "ApplicationDbContext": "Server=(localdb)\\mssqllocaldb;Database=ApplicationDbContext-d7c8b7f8-207d-47a9-95bf-0e666a399e5f;Trusted_Connection=True;MultipleActiveResultSets=true"
-}
+}` 
+
 
 3. Apply Migrations
 dotnet ef migrations add InitialCreate
 dotnet ef database update
 4. Run the Application
 dotnet run
-Visit http://localhost:5173 in your browser.
+`Visit http://localhost:5173 in your browser`.
 
 🔐 Authentication
 To enable login & roles:
