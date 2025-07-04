@@ -1,17 +1,13 @@
 ﻿
 ## 🧾 Inventory Management System App
 
-A full-stack ASP.NET Core MVC web application for managing product inventory in real-time. Built with ASP.NET Core, Entity Framework Core, and SQL Server
+A full-stack ASP.NET Core MVC web application for managing product inventory in real-time. Built with ASP.NET Core, Entity Framework Core, and SQL Server.
 
 ---
 
 ## 📦 Features
 
-- 🔐 Role-based Authentication with ASP.NET Identity (optional)
 - 🗃️ CRUD operations for Products, Categories, and Suppliers
-- 🔍 Search & Filter Products
-- 📈 Low-stock Alerts (optional)
-- ☁️ Deployed to Azure with Azure SQL Database
 - 🧱 Built using ASP.NET Core MVC and Entity Framework Core
 
 ---
@@ -42,6 +38,7 @@ InventorySystem/
 ## 🗃️ Entity Models
 
 ### Product
+`csharp` 
 public class Product {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -53,13 +50,17 @@ public class Product {
     public int SupplierId { get; set; }
     public Supplier Supplier { get; set; }
 }
+
 ### Category
+`csharp` 
 public class Category {
     public int Id { get; set; }
     public string Name { get; set; }
     public ICollection<Product> Products { get; set; }
 }
+
 ### Supplier
+`csharp` 
 public class Supplier {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -76,6 +77,7 @@ cd InventorySystem
 Update the connection string in appsettings.json:
 
 json
+`json` 
 "ConnectionStrings": {
     "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=InventoryDb;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true",
     "ApplicationDbContext": "Server=(localdb)\\mssqllocaldb;Database=ApplicationDbContext-d7c8b7f8-207d-47a9-95bf-0e666a399e5f;Trusted_Connection=True;MultipleActiveResultSets=true"
@@ -94,6 +96,13 @@ To enable login & roles:
 Add Identity to your project:
 dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
 Configure Identity in Program.cs
+
+--
+## TODO: For Next Sprint
+- 🔐 Role-based Authentication with ASP.NET Identity (optional)
+- 🔍 Search & Filter Products
+- 📈 Low-stock Alerts (optional)
+- ☁️ Deployed to Azure with Azure SQL Database
 
 
 
