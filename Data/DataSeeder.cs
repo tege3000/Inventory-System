@@ -11,9 +11,8 @@ namespace InventorySystem.Data
         public static async Task SeedRolesAndUsersAsync(IServiceProvider serviceProvider)
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            string[] roles = { "Admin", "Manager" };
+            string[] roles = { "Admin", "Staff", "Viewer" };
 
             foreach (var role in roles)
             {
@@ -23,20 +22,25 @@ namespace InventorySystem.Data
                 }
             }
 
-            // Create Admin user
+            // Create default Admin user
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var adminEmail = "admin@inventory.com";
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
             if (adminUser == null)
             {
-                adminUser = new ApplicationUser
+                var user = new ApplicationUser
                 {
                     UserName = adminEmail,
                     Email = adminEmail,
                     EmailConfirmed = true
                 };
-                await userManager.CreateAsync(adminUser, "Admin@123"); //  password is hashed internally
-                await userManager.AddToRoleAsync(adminUser, "Admin");
-            }
+                var result = await userManager.CreateAsync(adminUser, "Admin@123"); //  password is hashed internally
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, "Admin");
+                }
+             }
 
             // Create Manager user
             var managerEmail = "manager@inventory.com";

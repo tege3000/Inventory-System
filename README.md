@@ -76,6 +76,48 @@ public class Supplier {
 ```
 
 ---
+## 🔐 Role-Based Access Control
+
+The system supports **three user roles**, each with different levels of access:
+
+| Role   | Access Description                                      |
+|--------|----------------------------------------------------------|
+| **Admin**  | Full access: Create, Read, Update, Delete, and manage users |
+| **Staff**  | Can Create, Read, and Update records — but **cannot delete** |
+| **Viewer** | Read-only access — cannot create, update, or delete |
+
+> Access is enforced via `[Authorize(Roles = "...")]` attributes in controllers and views.
+
+## ✅ Seeding Roles and Default Admin
+
+The system automatically seeds **user roles** and a **default Admin account** at application startup.
+
+### 🧾 Seeded Roles:
+- `Admin`
+- `Staff`
+- `Viewer`
+
+### 👤 Default Admin Account:
+- **Email:** `admin@example.com`
+- **Password:** `Admin@123`
+
+> You can update this in `SeedData.cs` if needed.
+
+---
+
+## 🔒 Applying Role Restrictions
+
+### 🧱 Controller-level Access:
+Use the `[Authorize]` attribute to restrict access based on roles:
+
+```csharp
+[Authorize(Roles = "Admin")]
+public class AdminOnlyController : Controller { }
+
+[Authorize(Roles = "Admin,Staff")]
+public class StaffAndAdminController : Controller { }
+
+---
 
 ## 🛠️ Getting Started
 

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace InventorySystem.Controllers
 {
+    [Authorize(Roles = "Admin,Staff")]
     public class ProductsController : Controller
     {
         private readonly InventoryDbContext _context;
@@ -129,6 +130,7 @@ namespace InventorySystem.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -149,6 +151,7 @@ namespace InventorySystem.Controllers
         }
 
         // POST: Products/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
