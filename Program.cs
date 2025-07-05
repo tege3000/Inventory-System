@@ -1,29 +1,37 @@
 using InventorySystem.Data;
 using InventorySystem.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using InventorySystem.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<InventoryDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'InventoryDbContext' not found.")));
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
 })
-.AddRoles<IdentityRole>()
-.AddEntityFrameworkStores<InventoryDbContext>();
+    .AddEntityFrameworkStores<InventoryDbContext>()
+    .AddDefaultTokenProviders();
+
+
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login"; // or your actual login route
 });
 
+builder.Services.AddSingleton<IEmailSender, DummyEmailSender>();
+
+// Add services to the container.
+builder.Services.AddRazorPages();
 
 
 var app = builder.Build();

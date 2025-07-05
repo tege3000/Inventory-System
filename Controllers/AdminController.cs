@@ -6,10 +6,10 @@ using InventorySystem.Models;
 [Authorize(Roles = "Admin")]
 public class AdminController : Controller
 {
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
 
-    public AdminController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+    public AdminController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
         _roleManager = roleManager;
@@ -18,7 +18,10 @@ public class AdminController : Controller
     public async Task<IActionResult> Index()
     {
         var users = _userManager.Users.ToList();
-        var roles = _roleManager.Roles.Select(r => r.Name).ToList();
+        var roles = _roleManager.Roles
+            .Where(r => r.Name != null)
+            .Select(r => r.Name!)
+            .ToList();
 
         var model = new List<UserRoleViewModel>();
 
@@ -28,7 +31,7 @@ public class AdminController : Controller
             model.Add(new UserRoleViewModel
             {
                 UserId = user.Id,
-                Email = user.Email,
+                Email = user.Email ?? "",
                 Roles = userRoles.ToList(),
                 AvailableRoles = roles
             });
@@ -52,5 +55,51 @@ public class AdminController : Controller
         await _userManager.AddToRoleAsync(user, selectedRole);
 
         return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public IActionResult CreateUser()
+    {
+        var model = new CreateUserViewModel
+        {
+            AvailableRoles = _roleManager.Roles
+                .Where(r => r.Name != null)
+                .Select(r => r.Name!)
+                .ToList()
+        };
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateUser(CreateUserViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            model.AvailableRoles = _roleManager.Roles
+                .Where(r => r.Name != null)
+                .Select(r => r.Name!)
+                .ToList();
+            return View(model);
+        }
+
+        var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+        var result = await _userManager.CreateAsync(user, model.Password);
+
+        if (result.Succeeded)
+        {
+            await _userManager.AddToRoleAsync(user, model.Role);
+            return RedirectToAction("Index");
+        }
+
+        foreach (var error in result.Errors)
+        {
+            ModelState.AddModelError("", error.Description);
+        }
+
+        model.AvailableRoles = _roleManager.Roles
+            .Where(r => r.Name != null)
+            .Select(r => r.Name!)
+            .ToList();
+        return View(model);
     }
 }

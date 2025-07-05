@@ -148,7 +148,6 @@ dotnet run
 
 Visit: `http://localhost:5173/`
 
----
 
 ## 📋 TODO: For Next Sprint
 
@@ -157,7 +156,7 @@ Visit: `http://localhost:5173/`
 You can extend this project into a powerful, production-level system by adding:
 
 ### 🔒 Authentication & User Management
-- Role-based access (Admin, Staff, Viewer)
+- Role-based access (Admin, Staff, Viewer) ✅ Done
 - Session logging & audit trails
 - Two-Factor Authentication (2FA)
 
@@ -211,6 +210,11 @@ You can extend this project into a powerful, production-level system by adding:
 - [ ] SaaS multi-tenant mode  
 
 ---
+## Other
+
+- Develop UI to be more beautiful
+- Check and handle exceptions properly. Creating proper Error/Eception Pages
+- Create Unit Testing
 
 ---
 ## 👨‍💻 Author

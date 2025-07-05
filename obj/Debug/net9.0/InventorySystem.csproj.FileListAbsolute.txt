@@ -263,6 +263,7 @@ C:\Users\e\InventorySystem\obj\Debug\net9.0\InventorySystem.MvcApplicationPartsA
 C:\Users\e\InventorySystem\obj\Debug\net9.0\InventorySystem.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\e\InventorySystem\obj\Debug\net9.0\InventorySystem.RazorAssemblyInfo.cache
 C:\Users\e\InventorySystem\obj\Debug\net9.0\InventorySystem.RazorAssemblyInfo.cs
+C:\Users\e\InventorySystem\obj\Debug\net9.0\InventorySystem.sourcelink.json
 C:\Users\e\InventorySystem\obj\Debug\net9.0\rjimswa.dswa.cache.json
 C:\Users\e\InventorySystem\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
 C:\Users\e\InventorySystem\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json

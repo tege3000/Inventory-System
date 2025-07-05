@@ -23,19 +23,26 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Role" asp-action="Index">Role Management</a>
-                        </li>
-                    }
 
-                    @if (User.IsInRole("Viewer"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Reports" asp-action="Index">Manager Reports</a>
-                        </li>
-                    }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Admin" asp-action="Index">Admin Dashboard</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Role" asp-action="Index">Role Management</a>
+                            </li>
+                        }
+
+                        @if (User.IsInRole("Viewer"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Reports" asp-action="Index">Manager Reports</a>
+                            </li>
+                        }
                     </ul>
                 </div>
                 <partial name="_LoginPartial" />

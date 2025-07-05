@@ -1,3 +1,66 @@
-﻿.vs/
-bin/
-obj/
+﻿## Ignore Visual Studio temporary files, build results, and
+## user-specific files
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+.idea/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Others
+*.dbmdl
+*.jfm
+*.pdb
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# VS working folders
+.vs/
+
+# DotCover
+.idea/.dotCover
+
+# Node modules (if using frontend)
+node_modules/
+
+# npm package lock
+package-lock.json
+
+# dotenv
+.env
+.env.*
+
+# Coverage
+coverage/
+
+# Git conflict files
+*.orig

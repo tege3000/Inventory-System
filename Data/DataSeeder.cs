@@ -28,19 +28,17 @@ namespace InventorySystem.Data
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
             if (adminUser == null)
             {
-                var user = new ApplicationUser
+                adminUser = new ApplicationUser
                 {
                     UserName = adminEmail,
                     Email = adminEmail,
                     EmailConfirmed = true
                 };
-                var result = await userManager.CreateAsync(adminUser, "Admin@123"); //  password is hashed internally
 
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user, "Admin");
-                }
-             }
+               
+                await userManager.CreateAsync(adminUser, "Admin@123"); //  password is hashed internally
+                await userManager.AddToRoleAsync(adminUser, "Admin");
+            }
 
             // Create Manager user
             var managerEmail = "manager@inventory.com";
@@ -54,7 +52,7 @@ namespace InventorySystem.Data
                     EmailConfirmed = true
                 };
                 await userManager.CreateAsync(managerUser, "Manager@123");
-                await userManager.AddToRoleAsync(managerUser, "Manager");
+                await userManager.AddToRoleAsync(managerUser, "Staff");
             }
         }
     }

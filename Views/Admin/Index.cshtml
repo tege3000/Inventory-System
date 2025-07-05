@@ -1,5 +1,39 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<InventorySystem.Models.UserRoleViewModel>
 @{
+    ViewData["Title"] = "Manage User Roles";
 }
+
+<h2>Manage User Roles</h2>
+<a asp-action="CreateUser" class="btn btn-success mb-3">➕ Create New User</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Current Role(s)</th>
+            <th>Assign New Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@string.Join(", ", user.Roles)</td>
+                <td>
+                    <form asp-action="UpdateRole" method="post">
+                        <input type="hidden" name="userId" value="@user.UserId" />
+                        <select name="selectedRole" class="form-select" required>
+                            <option value="">-- Select Role --</option>
+                            @foreach (var role in user.AvailableRoles)
+                            {
+                                <option value="@role">@role</option>
+                            }
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-primary mt-1">Update</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
