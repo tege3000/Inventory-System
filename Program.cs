@@ -33,6 +33,8 @@ builder.Services.AddSingleton<IEmailSender, DummyEmailSender>();
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.AddScoped<AuditService>();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using InventorySystem.Data;
 using InventorySystem.Models;
 using Microsoft.AspNetCore.Authorization;
+using InventorySystem.Services;
 
 namespace InventorySystem.Controllers
 {
@@ -15,10 +16,12 @@ namespace InventorySystem.Controllers
     public class ProductsController : Controller
     {
         private readonly InventoryDbContext _context;
+        private readonly AuditService _audit;
 
-        public ProductsController(InventoryDbContext context)
+        public ProductsController(InventoryDbContext context, AuditService audit)
         {
             _context = context;
+            _audit = audit;
         }
 
         // GET: Products
@@ -162,6 +165,7 @@ namespace InventorySystem.Controllers
                 _context.Products.Remove(product);
             }
 
+            await _audit.LogAction($"Deleted product: {product?.Name}");
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
