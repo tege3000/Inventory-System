@@ -36,6 +36,15 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<AuditService>();
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = true;
+    options.Tokens.AuthenticatorTokenProvider = TokenOptions.DefaultAuthenticatorProvider;
+})
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<InventoryDbContext>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

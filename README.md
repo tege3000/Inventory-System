@@ -158,7 +158,7 @@ You can extend this project into a powerful, production-level system by adding:
 ### 🔒 Authentication & User Management
 - Role-based access (Admin, Staff, Viewer) ✅ Done
 - Session logging & audit trails  ✅ Done
-- Two-Factor Authentication (2FA)
+- Two-Factor Authentication (2FA) ✅ Done
 
 ### 📊 Analytics & Dashboards
 - Visual charts for stock levels, categories, suppliers
